@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible"
+        content="ie=edge">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <form id="chatform" action="#">
+    <input id="name" placeholder="Your name">
+    <br>
+    <input id="chatbox">
+    <button id="send">Send</button>
+  </form>
+
+  <script>
+    const chatform = $('#chatform')
+    const chatbox = $('#chatbox')
+
+    chatform.submit(event => {
+      const message = chatbox.val()
+      if (message) {
+        $.ajax({
+          method: 'POST',
+          url: 'http://localhost:51741/message',
+          data: {
+            message,
+            name: $('#name').val() || 'Anonymous'
+          }
+        })
+        chatbox.val('')
+      }
+    })
+
+  </script>
+</body>
+
+</html>
